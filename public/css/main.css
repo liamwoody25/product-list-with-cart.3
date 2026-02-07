@@ -4,9 +4,20 @@
   font-family: 'Red Hat Text', sans-serif;
  }
 
+ h2 {
+  font-size: 24px;
+  font-weight: 700;
+  padding-bottom: 24px;
+  margin: 0;
+  color: #C73B0F;
+
+ }
+
  h4 {
   font-size: 14px;
-  
+  font-weight: 400;
+  color: #87635A;
+  margin: 0;
  }
 
  p {
@@ -78,6 +89,20 @@
   font-weight: 700;
 }
 
+.remove-btn {
+  background: transparent;
+  border: transparent;
+}
+
+.bi-x-circle {
+  font-size: 16px;
+  color: #87635A;
+}
+
+span {
+  color:#C73B0F;
+}
+
 /**** components *****/
 
 
@@ -143,3 +168,20 @@ body {
   margin-bottom: 16px;
   gap: 16px;
 }
+
+.product-quantity {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.cart-total-content {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.cart-total-content h2{
+  color:#260F08;
+}
+
