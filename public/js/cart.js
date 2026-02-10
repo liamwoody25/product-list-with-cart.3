@@ -177,6 +177,7 @@ function updateCart() {
   let productItem = localStorage.getItem('addItemToCart');
   let items = localStorage.getItem('cartProductsInCart');
   let cartContainer = document.querySelector('.cart-content');
+  let cartPrice = localStorage.getItem('totalPrice');
 
   items = JSON.parse(items)
 
@@ -216,6 +217,19 @@ function updateCart() {
     cartContainer.append(productItem)
     })
   }
+
+  const cartTotal = document.createElement('div');
+  cartTotal.classList.add('cart-total-content');
+
+  const cartHd = document.createElement('h4');
+  cartHd.classList.add('Order-total-text');
+  cartHd.textContent = 'Order Total';
+
+  const cartTitle = document.createElement('h2');
+  cartTitle.textContent = `${cartPrice}`;
+
+  cartTotal.append(cartHd, cartTitle);
+  cartContainer.append(cartTotal);
 
   
 
