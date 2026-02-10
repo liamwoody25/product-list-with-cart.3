@@ -148,10 +148,11 @@ function addItemToCart(cartProduct,[i]) {
 
 // this function removes an item from the cart
 
-function removeItemFromCart(i) {
+function removeItemFromCart(cartProduct,i) {
   const output = document.querySelectorAll('#quantity-output')[i];
   let result = Number(output.innerText) - 1
   let productItem = localStorage.getItem('addItemToCart');
+  let cartPrice = localStorage.getItem('totalPrice');
 
 
   if (result < 0) {
@@ -169,6 +170,8 @@ function removeItemFromCart(i) {
   if (result === 0) {
     quanbtn[i].style.display = 'none'
   }
+
+ 
 }
 
 
@@ -226,12 +229,12 @@ function updateCart() {
   cartHd.textContent = 'Order Total';
 
   const cartTitle = document.createElement('h2');
-  cartTitle.textContent = `${cartPrice}`;
+  cartTitle.textContent = `$${cartPrice}`;
 
   cartTotal.append(cartHd, cartTitle);
   cartContainer.append(cartTotal);
 
-  
+  localStorage.setItem('totalPrice', cartPrice)
 
 
   if (productItem) {
@@ -324,7 +327,8 @@ for (let i = 0; i < insertBtn.length; i++) {
 
 for (let i = 0; i < deleteBtn.length; i++) {
   deleteBtn[i].addEventListener('click', function(){
-    removeItemFromCart(i)
+    removeItemFromCart(cartProducts[i],[i])
+    totalPrice(cartProducts[i],[i])
     updateCart()
   })
 }
