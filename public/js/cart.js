@@ -172,6 +172,8 @@ function removeItemFromCart(cartProduct,i) {
   }
 
  
+
+ 
 }
 
 
@@ -221,21 +223,30 @@ function updateCart() {
     })
   }
 
-  const cartTotal = document.createElement('div');
-  cartTotal.classList.add('cart-total-content');
+    const cartTotal = document.createElement('div');
+    cartTotal.classList.add('cart-total-content');
 
-  const cartHd = document.createElement('h4');
-  cartHd.classList.add('Order-total-text');
-  cartHd.textContent = 'Order Total';
+    const cartHd = document.createElement('h4');
+    cartHd.classList.add('Order-total-text');
+    cartHd.textContent = 'Order Total';
 
-  const cartTitle = document.createElement('h2');
-  cartTitle.textContent = `$${cartPrice}`;
+    const cartTitle = document.createElement('h2');
+    cartTitle.textContent = `$${cartPrice}`;
 
-  cartTotal.append(cartHd, cartTitle);
-  cartContainer.append(cartTotal);
+    cartTotal.append(cartHd, cartTitle);
+    cartContainer.append(cartTotal);
 
-  localStorage.setItem('totalPrice', cartPrice)
+    localStorage.setItem('totalPrice', cartPrice)
 
+    
+  //   cartPrice -= product.price
+
+  //   if (cartPrice < 0) {
+  //     cartPrice = 0;
+  //   }
+
+
+  // localStorage.setItem('totalPrice', cartPrice);
 
   if (productItem) {
     document.getElementById('cart-output').textContent = productItem;
