@@ -122,11 +122,21 @@ body {
 
 /**** body ****/
 
+/**** main-section ****/
+
+.product-cards-and-cart {
+  display: flex;
+  flex-wrap: wrap;
+}
 
 
+/**** product-section ****/
 
-
-/**** product-card ****/
+.product-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
 
 .item-card {
   width: 100%;
@@ -139,7 +149,8 @@ body {
   display: block;
 }
 
-/**** product-card ****/
+/**** product-section ****/
+
 
 
 
@@ -158,6 +169,16 @@ body {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 16px;
+}
+
+.cart-placeholder-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cart-content {
+  display: none;
 }
 
 .product-item {

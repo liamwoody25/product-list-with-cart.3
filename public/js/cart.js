@@ -2,6 +2,7 @@ const cartSubmit = document.querySelectorAll('.cart-btn');
 const quanbtn = document.querySelectorAll('.quantity-content');
 const insertBtn = document.querySelectorAll('.increase-btn');
 const deleteBtn = document.querySelectorAll('.decrease-btn');
+const cartImageHolder = document.querySelector('.cart-placeholder-content');
 
 const cartProducts = [
       {
@@ -130,10 +131,15 @@ function addItemToCart(cartProduct,[i]) {
   output.innerText = result;
 
   quanbtn[i].style.display = 'block'
+  cartImageHolder.style.display = 'none'
+ 
+  
+ 
 
   if (productItem) {
     localStorage.setItem('addItemToCart', productItem + 1)
     document.getElementById('cart-output').textContent = productItem + 1;
+    
   } else {
     localStorage.setItem('addItemToCart', 1)
     document.getElementById('cart-output').textContent = 1
@@ -153,11 +159,13 @@ function removeItemFromCart(cartProduct,i) {
   let result = Number(output.innerText) - 1
   let productItem = localStorage.getItem('addItemToCart');
   let cartPrice = Number(localStorage.getItem('totalPrice')) || 0;
-
+    
 
   if (result < 0) {
     result = 0
     productItem = parseInt(productItem)
+
+  // this line of code dcreases the number when the dcrease button is clicked
     localStorage.setItem('addItemToCart', productItem - 1)
     document.getElementById('cart-output').textContent = productItem = 1;
   } else {
@@ -165,20 +173,23 @@ function removeItemFromCart(cartProduct,i) {
     document.getElementById('cart-output').textContent -= 1;
   }
 
-    output.innerText = result
+  output.innerText = result
 
   if (result === 0) {
     quanbtn[i].style.display = 'none'
   }
 
- 
   cartPrice -= cartProduct.price
 
-    if (cartPrice < 0) {
-      cartPrice = 0;
-    }
+  if (cartPrice < 0) {
+     cartPrice = 0;
+  }
 
-localStorage.setItem('totalPrice', cartPrice);
+  localStorage.setItem('totalPrice', cartPrice -= cartProduct.price)
+  
+  
+
+
   
  
 }
@@ -197,6 +208,7 @@ function updateCart() {
     cartContainer.innerHTML = ''
     Object.values(items).forEach(function(product){
 
+  // this line of code is the product item
     const productItem = document.createElement('div');
     productItem.classList.add('product-item');
 
@@ -225,8 +237,14 @@ function updateCart() {
     priceQuan.append(cartQaun, priceContent, productPrice);
     priceContainer.append(productName, priceQuan);
 
+
+    removeBtn.addEventListener('click', function(){
+      productItem.remove(removeBtn, priceContainer)
+    })
+
     productItem.append(removeBtn, priceContainer);
-    cartContainer.append(productItem)
+    cartContainer.append(productItem);
+
     })
   }
 
@@ -243,14 +261,18 @@ function updateCart() {
     cartTotal.append(cartHd, cartTitle);
     cartContainer.append(cartTotal);
 
-    localStorage.setItem('totalPrice', cartPrice)
 
-    
-    
+    if (cartPrice < 0) {
+      cartPrice = 0
+    }
 
   if (productItem) {
     document.getElementById('cart-output').textContent = productItem;
   }
+
+  
+  cartContainer.style.display = 'block'
+  cartImageHolder.style.display = 'none'
 
   // console.log(items)
 }
@@ -295,10 +317,10 @@ function addProduct(cartProduct) {
 
 
 // this function is for when the quantity button the product price shows 
-function totalPrice (cartProduct) {
-  console.log('the cartprice', cartProduct.price)
-  let cartprice = localStorage.getItem('totalPrice');
-  console.log('the cartprice is', cartprice)
+function totalPrice(cartProduct) {
+  // console.log('the cartprice', cartProduct.price)
+  let cartprice = localStorage.getItem('totalPrice'); 
+  // console.log('the cartprice is', cartprice)
 
 
   if (cartprice != null) {
