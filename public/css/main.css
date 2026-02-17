@@ -4,6 +4,13 @@
   font-family: 'Red Hat Text', sans-serif;
  }
 
+ h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-top: 0;
+  color: #260F08;
+ }
+
  h2 {
   font-size: 24px;
   font-weight: 700;
@@ -30,6 +37,8 @@
 
 .cart-btn-content {
   position: relative;
+  left: 1px;
+  bottom: 30px;
 }
 
 .quantity-content {
@@ -50,6 +59,8 @@
   align-items: center;
   color: #260F08;
   position: absolute;
+  left: 80px;
+  box-shadow: 3px 5px 9px -6px;
 }
 
 .quantity-btn {
@@ -62,6 +73,7 @@
   justify-content: space-between;
   align-items: center;
   position: absolute;
+  left: 80px;
 }
 
 .decrease-btn,
@@ -97,6 +109,10 @@
 .bi-x-circle {
   font-size: 16px;
   color: #87635A;
+}
+
+.product-price {
+  color: #C73B0F;
 }
 
 span {
@@ -142,11 +158,16 @@ body {
   width: 100%;
   border-radius: 8px;
 }
-
+.item-card .product-image-tablet{display: none;}
 .item-card .product-image {
   width: 100%;
   border-radius: 8px;
   display: block;
+  box-shadow: 3px 5px 9px -6px black;
+}
+
+.card-text-content {
+  margin-top: 24px;
 }
 
 /**** product-section ****/
@@ -172,13 +193,12 @@ body {
 }
 
 .cart-placeholder-content {
-  display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .cart-content {
-  display: none;
+  display: block;
 }
 
 .product-item {
@@ -206,3 +226,70 @@ body {
   color:#260F08;
 }
 
+/**** cart section ****/
+
+
+
+
+/**** media queries tablet ****/
+
+@media screen and (min-width:768px) {
+
+  /**** components ****/
+
+  .cart-btn-content {
+    position: relative;
+    left: -54px;
+  }
+
+  /**** components ****/
+
+
+
+  
+  /**** body ****/
+
+  .container {
+    max-width: 1440px;
+    width: 90%;
+    margin: 40px;
+  }
+
+  /**** body ****/
+
+
+
+  /***** main section *****/
+
+  .product-cards-and-cart {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  /** product section **/
+
+  .item-card {
+    width: 31%;
+    border-radius: 8px;
+  }
+
+  .item-card .product-image{display: none;}
+  .item-card .product-image-tablet {
+    display: block;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: 3px 5px 9px -6px black;
+  }
+
+  /** product section **/
+
+
+  /**** cart section ****/
+
+  .cart-section {
+    width: 93%;
+    margin-top: 24px;
+  }
+
+}

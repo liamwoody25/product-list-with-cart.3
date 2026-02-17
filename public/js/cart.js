@@ -131,7 +131,7 @@ function addItemToCart(cartProduct,[i]) {
   output.innerText = result;
 
   quanbtn[i].style.display = 'block'
-  cartImageHolder.style.display = 'none'
+  
  
   
  
@@ -179,15 +179,16 @@ function removeItemFromCart(cartProduct,i) {
     quanbtn[i].style.display = 'none'
   }
 
+  
   cartPrice -= cartProduct.price
 
   if (cartPrice < 0) {
-     cartPrice = 0;
+    cartPrice = 0
   }
 
   localStorage.setItem('totalPrice', cartPrice -= cartProduct.price)
   
-  
+
 
 
   
@@ -208,7 +209,8 @@ function updateCart() {
     cartContainer.innerHTML = ''
     Object.values(items).forEach(function(product){
 
-  // this line of code is the product item
+  // this line of code creates the product item
+   
     const productItem = document.createElement('div');
     productItem.classList.add('product-item');
 
@@ -225,56 +227,59 @@ function updateCart() {
     const priceQuan = document.createElement('div');
     priceQuan.classList.add('product-quantity');
 
-    const cartQaun = document.createElement('span');
-    cartQaun.textContent = `${product.inCart}x`;
+    const cartQuan = document.createElement('span');
+    cartQuan.textContent = `${product.inCart}x`;
 
     const priceContent = document.createElement('h4');
     priceContent.textContent = `$${product.inCart * product.price}`;
 
     const productPrice = document.createElement('h4');
-    productPrice.textContent = `$${product.price}`;
+    productPrice.textContent = `$${product.price.toFixed(2)}`;
 
-    priceQuan.append(cartQaun, priceContent, productPrice);
+    
+
+    // this code displays the product item
+    priceQuan.append(cartQuan, priceContent, productPrice);
     priceContainer.append(productName, priceQuan);
 
-
-    removeBtn.addEventListener('click', function(){
-      productItem.remove(removeBtn, priceContainer)
-    })
-
     productItem.append(removeBtn, priceContainer);
-    cartContainer.append(productItem);
+    cartContainer.append(productItem)
 
     })
-  }
-
-    const cartTotal = document.createElement('div');
-    cartTotal.classList.add('cart-total-content');
-
-    const cartHd = document.createElement('h4');
-    cartHd.classList.add('Order-total-text');
-    cartHd.textContent = 'Order Total';
-
-    const cartTitle = document.createElement('h2');
-    cartTitle.textContent = `$${cartPrice}`;
-
-    cartTotal.append(cartHd, cartTitle);
-    cartContainer.append(cartTotal);
-
-
-    if (cartPrice < 0) {
-      cartPrice = 0
-    }
-
-  if (productItem) {
-    document.getElementById('cart-output').textContent = productItem;
   }
 
   
-  cartContainer.style.display = 'block'
-  cartImageHolder.style.display = 'none'
+  // this code shows the price of when the quantity button is clicked 
+
+  const cartTotal = document.createElement('div');
+  cartTotal.classList.add('cart-total-content');
+
+  const cartHd = document.createElement('h4');
+  cartHd.classList.add('order-total-text');
+  cartHd.textContent = 'Order Total';
+
+  const cartTitle = document.createElement('h2');
+  cartTitle.textContent = `$${cartPrice.toFixed(2)}`;
+
+
+  // this code displays the total price
+  cartTotal.append(cartHd, cartTitle);
+  cartContainer.append(cartTotal);
+
+
+
+
+    
+
+
 
   // console.log(items)
+
+
+cartImageHolder.style.display = 'none'
+  if (productItem) {
+    document.getElementById('cart-output').textContent = productItem;
+  }
 }
 
 updateCart()
