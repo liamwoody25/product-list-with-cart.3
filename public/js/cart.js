@@ -75,7 +75,7 @@ const cartProducts = [
         "name": "Lemon Meringue Pie",
         "category": "Pie",
         "price": 5.00,
-        "imCart": 0
+        "inCart": 0
      },
      {
         "image": {
@@ -119,8 +119,8 @@ const cartProducts = [
 // this function sends an item to the cart
 
 function addItemToCart(cartProduct,[i]) {
-  const output = document.querySelectorAll('#quantity-output')[i];
-  const result = Number(output.innerText) + 1;
+  let output = document.querySelectorAll('.quantity-output')[i];
+  let result = Number(output.innerText) + 1;
   let productItem = localStorage.getItem('addItemToCart');
 
   productItem = parseInt(productItem)
@@ -155,32 +155,28 @@ function addItemToCart(cartProduct,[i]) {
 // this function removes an item from the cart
 
 function removeItemFromCart(cartProduct,i) {
-  const output = document.querySelectorAll('#quantity-output')[i];
+  const output = document.querySelectorAll('.quantity-output')[i];
   let result = Number(output.innerText) - 1
   let productItem = localStorage.getItem('addItemToCart');
   let cartPrice = Number(localStorage.getItem('totalPrice')) || 0;
     
-
   if (result < 0) {
     result = 0
     productItem = parseInt(productItem)
 
   // this line of code dcreases the number when the dcrease button is clicked
-    localStorage.setItem('addItemToCart', productItem - 1)
+    localStorage.setItem('addItemToCart', productItem = 1)
     document.getElementById('cart-output').textContent = productItem = 1;
   } else {
     localStorage.setItem('addItemToCart', productItem - 1 )
-    document.getElementById('cart-output').textContent -= 1;
+    document.getElementById('cart-output').textContent - 1;
   }
 
   output.innerText = result
 
-  if (result === 0) {
+  if (result === 1) {
     quanbtn[i].style.display = 'none'
   }
-
-  
-  cartPrice -= cartProduct.price
 
   if (cartPrice < 0) {
     cartPrice = 0
@@ -189,10 +185,6 @@ function removeItemFromCart(cartProduct,i) {
   localStorage.setItem('totalPrice', cartPrice -= cartProduct.price)
   
 
-
-
-  
- 
 }
 
 
@@ -234,13 +226,24 @@ function updateCart() {
     priceContent.textContent = `$${product.inCart * product.price}`;
 
     const productPrice = document.createElement('h4');
-    productPrice.textContent = `$${product.price.toFixed(2)}`;
+    productPrice.textContent = `$${product.price}`;
 
     
 
     // this code displays the product item
     priceQuan.append(cartQuan, priceContent, productPrice);
     priceContainer.append(productName, priceQuan);
+
+    removeBtn.addEventListener('click', function(){
+      productItem.remove(removeBtn, priceContainer);
+      if (items && cartContainer) {
+        cartContainer.style.display = 'none' 
+        cartImageHolder.style.display = 'block'
+      } else {
+       cartImageHolder.styled.display = 'flex'
+      }
+
+    })
 
     productItem.append(removeBtn, priceContainer);
     cartContainer.append(productItem)
@@ -249,34 +252,34 @@ function updateCart() {
   }
 
   
-  // this code shows the price of when the quantity button is clicked 
+    // this code shows the price of when the quantity button is clicked 
 
-  const cartTotal = document.createElement('div');
-  cartTotal.classList.add('cart-total-content');
+    const cartTotal = document.createElement('div');
+    cartTotal.classList.add('cart-total-content');
 
-  const cartHd = document.createElement('h4');
-  cartHd.classList.add('order-total-text');
-  cartHd.textContent = 'Order Total';
+    const cartHd = document.createElement('h4');
+    cartHd.classList.add('order-total-text');
+    cartHd.textContent = 'Order Total';
 
-  const cartTitle = document.createElement('h2');
-  cartTitle.textContent = `$${cartPrice.toFixed(2)}`;
-
-
-  // this code displays the total price
-  cartTotal.append(cartHd, cartTitle);
-  cartContainer.append(cartTotal);
+    const cartTitle = document.createElement('h2');
+    cartTitle.textContent = `$${cartPrice.toFixed(2)}`;
 
 
+    // this code displays the total price
+    cartTotal.append(cartHd, cartTitle);
+    cartContainer.append(cartTotal);
 
 
-    
+    if (items && cartContainer) {
+      cartContainer.style.display = 'block'
+      cartImageHolder.style.display = 'none'
 
-
-
+    } else {
+      cartContainer.style.display = 'none'
+    }
+  
   // console.log(items)
 
-
-cartImageHolder.style.display = 'none'
   if (productItem) {
     document.getElementById('cart-output').textContent = productItem;
   }
@@ -329,7 +332,7 @@ function totalPrice(cartProduct) {
 
 
   if (cartprice != null) {
-    cartprice = parseInt(cartprice)
+    cartprice = parseFloat(cartprice)
     localStorage.setItem('totalPrice', cartprice + cartProduct.price)
   } else {
     localStorage.setItem('totalPrice', cartProduct.price)
@@ -366,7 +369,6 @@ for (let i = 0; i < insertBtn.length; i++) {
 for (let i = 0; i < deleteBtn.length; i++) {
   deleteBtn[i].addEventListener('click', function(){
     removeItemFromCart(cartProducts[i],[i])
-    totalPrice(cartProducts[i],[i])
     updateCart()
   })
 }
