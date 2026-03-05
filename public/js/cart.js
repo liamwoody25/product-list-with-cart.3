@@ -240,7 +240,7 @@ function updateCart() {
         cartContainer.style.display = 'none' 
         cartImageHolder.style.display = 'block'
       } else {
-       cartImageHolder.styled.display = 'flex'
+       cartImageHolder.styled.display = 'block'
       }
 
     })
